@@ -1,6 +1,7 @@
 import "./config/config.js";
 import express from "express";
 import cookieParser from "cookie-parser";
+import path from "path";
 
 //Importing Routes
 import userRoutes from "./routes/userRoutes.js";
@@ -11,6 +12,7 @@ import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 //setting up the express app
 const app = express();
 const port = process.env.PORT || 5000;
+const __dirname = path.dirname(new URL(import.meta.url).pathname);
 
 // Parsing Middleware
 app.use(express.json());
@@ -21,7 +23,9 @@ app.use(cookieParser());
 app.use("/api/users", userRoutes);
 
 //home route
-app.get("/", (req, res) => res.send("API running"));
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
+});
 
 // Error Handling Middleware
 app.use(notFound);
