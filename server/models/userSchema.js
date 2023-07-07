@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
-import randomBytes from "crypto";
 
 const userSchema = mongoose.Schema(
   {
@@ -29,8 +28,7 @@ userSchema.pre("save", async function (next) {
     next();
   }
 
-  //const salt = await bcrypt.genSalt(10);
-  const salt = randomBytes(10).toString("hex");
+  const salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, salt);
 });
 
