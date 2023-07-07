@@ -1,6 +1,6 @@
 import "./config/config.js";
 import express from "express";
-import { config } from "dotenv";
+import connectToMDB from "./config/db.js";
 
 //Routes
 import userRoutes from "./routes/userRoutes.js";
@@ -8,7 +8,7 @@ import userRoutes from "./routes/userRoutes.js";
 //Middleware
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 
-config();
+connectToMDB();
 
 //setting up the express app
 const app = express();
