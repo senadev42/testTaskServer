@@ -1,6 +1,6 @@
 import asyncHandler from "express-async-handler";
-
-import User from "../schemas/userSchema.js";
+import User from "../models/userSchema.js";
+import generateToken from "../utils/generateJWT.js";
 
 /**
  * Authenticate a user and return a token.
@@ -22,11 +22,20 @@ const registerUser = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
 
   //check if user exists and throw error
-  const userExists = await User.findOne({ email });
-  if (userExists) {
+  const emailExists = await User.findOne({ email });
+  if (emailExists) {
     res.status(400);
-    throw new Error("User already exists");
+    throw new Error("Email already exists");
   }
+
+  //check if user exists and throw error
+  const usernameExists = await User.findOne({ name });
+  if (usernameExists) {
+    res.status(400);
+    throw new Error("Username already exists");
+  }
+
+  generateToken(res, user._id);
 
   //otherwise create user
   const user = await User.create({
