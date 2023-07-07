@@ -27,8 +27,5 @@ app.get("/", (req, res) => res.send("API running"));
 app.use(notFound);
 app.use(errorHandler);
 
-//home route
-app.get("/", (req, res) => res.send("API running"));
-
 //listening to the port
 app.listen(port, () => console.log(`Server started on port ${port}`));
