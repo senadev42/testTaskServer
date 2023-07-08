@@ -5,6 +5,7 @@ import path from "path";
 
 //Importing Routes
 import userRoutes from "./routes/userRoutes.js";
+import exploreRoutes from "./routes/exploreRoutes.js";
 
 //Importing Middleware
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
