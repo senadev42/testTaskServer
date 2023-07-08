@@ -88,7 +88,8 @@ const logoutUser = (req, res) => {
     expires: new Date(0),
     maxAge: 0,
   });
-  console.log(process.env.JWT_COOKIE_NAME);
+
+  //console.log(process.env.JWT_COOKIE_NAME);
   res.status(200).json({ message: "Logged out successfully" });
 };
 
