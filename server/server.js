@@ -21,6 +21,7 @@ app.use(cookieParser());
 
 // Binding Endpoints to Routes
 app.use("/api/users", userRoutes);
+app.use("/api/explore", exploreRoutes);
 
 //home route
 app.get("/", (req, res) => {
