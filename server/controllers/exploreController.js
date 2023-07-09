@@ -11,6 +11,8 @@ import { getCitiesNearMe } from "../GeoDB/citiesNearMe.js";
 const getNearbyCities = asyncHandler(async (req, res) => {
   const { coords, _id } = req.body;
 
+  console.log("Recieved:" + coords);
+
   const cities = await getCitiesNearMe(coords);
 
   console.log("/api/explore/nearby-cities invoked");

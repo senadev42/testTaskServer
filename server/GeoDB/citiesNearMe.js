@@ -9,20 +9,20 @@ const basegeoURL = "https://wft-geo-db.p.rapidapi.com/v1/geo/";
 const baselocalURL = "https://wft-geo-db.p.rapidapi.com/v1/locale/";
 
 export async function getCitiesNearMe(coords) {
-  console.log("\n Function invoked: Get cities near me called \n");
+  console.log("\nFunction invoked: Get cities near me called \n");
 
   const paramsOptions = {
     types: "CITY", //ADM2 | CITY | ISLAND
-    distanceUnit: "KM", //MI/KM
+    distanceUnit: undefined, //MI/KM
     limit: 10,
     offset: 0,
     sort: undefined,
-    minPopulation: 1,
+    minPopulation: undefined,
     maxPopulation: undefined,
   };
 
   console.log("Coords: " + coords);
-  console.log("Params: " + JSON.stringify(paramsOptions) + "\n\n");
+  console.log("Params: " + JSON.stringify(paramsOptions) + "\n");
 
   // We ex
 
@@ -80,8 +80,6 @@ export async function getCitiesNearMe(coords) {
     console.error(error);
   }
 
-  //console.log("\n\n Results: " + JSON.stringify(results));
-
   let sanitizedResults = results.map((city) => ({
     cityname: city.name,
     countryCode: city.countryCode,
@@ -90,10 +88,8 @@ export async function getCitiesNearMe(coords) {
     distance: city.distance,
   }));
 
-  // console.log(sanitizedResults);
-
   return sanitizedResults;
 }
 
-// const testcoord = "+9.022700+38.746800";
-// console.log(getCitiesNearMe(testcoord));
+// const testcoord = "+19.022700+38.746800";
+// console.log(await getCitiesNearMe(testcoord));
