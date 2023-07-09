@@ -7,12 +7,10 @@ import axios from "axios";
 const basegeoURL = "https://wft-geo-db.p.rapidapi.com/v1/geo/";
 
 export async function getCountryDetails(countryCode) {
-  //logging
-  console.log("\nFunction invoked: Get Country Details\n");
-  console.log("Making request to " + basegeoURL + "countries/" + countryCode);
-
-  //test setup
-  console.log("Code: " + countryCode);
+  //local logging
+  // console.log("\nFunction invoked: Get Country Details");
+  // console.log("Making request to " + basegeoURL + "countries/" + countryCode);
+  // console.log("Code: " + countryCode);
 
   const options = {
     method: "GET",
@@ -40,5 +38,5 @@ export async function getCountryDetails(countryCode) {
   return results;
 }
 
-const testcoord = "UA";
-console.log(await getCountryDetails(testcoord));
+// const testcoord = "UA";
+// console.log(await getCountryDetails(testcoord));
