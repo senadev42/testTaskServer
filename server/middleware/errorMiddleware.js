@@ -7,8 +7,12 @@ const notFound = (req, res, next) => {
 
 //For errors in routes
 const errorHandler = (err, req, res, next) => {
-  //set status code and error message
-  let statusCode = res.statusCode === 200 ? 500 : res.statusCode;
+  //status code and error message
+  let statusCode = res.statusCode;
+  if (statusCode < 400) {
+    statusCode = 500;
+  }
+
   let message = err.message;
 
   // If Mongoose not found error, set to 404 and change message
