@@ -10,6 +10,26 @@ const countrySearchSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    countryName: {
+      type: String,
+      required: true,
+    },
+    countryCapital: {
+      type: String,
+      required: true,
+    },
+    numRegions: {
+      type: Number,
+      required: true,
+    },
+    flagUri: {
+      type: String,
+      required: true,
+    },
+    callingCode: {
+      type: String,
+      required: true,
+    },
   },
   {
     timestamps: true,
