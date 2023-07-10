@@ -12,6 +12,6 @@ import { getCountryData } from "../controllers/exploreController.js";
 // 1. Nearby Cities
 router.route("/nearby-cities").post(protect, getNearbyCities);
 // 2. Get Country Data
-router.route("/country-data").get(protect, getCountryData);
+router.route("/country-data").post(protect, getCountryData);
 
 export default router;
