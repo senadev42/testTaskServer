@@ -49,7 +49,9 @@ The project has the following folder structure:
 
 ## Installation
 
-To run the application on your machine, you need to have Node.js and MongoDB installed. Then, follow these steps:
+To run the application on your machine, you need to have Node.js and MongoDB installed (or you can use Atlas). 
+Additionally, you will have to make a free account [here](https://rapidapi.com/wirefreethought/api/geodb-cities/) and get an api key.
+Then, follow these steps:
 
 1. Clone the repository to your local machine using the command:
 
@@ -108,24 +110,24 @@ The application was built with the following technologies and libraries:
 
 The Test Task API includes the following endpoints:
 
-##### User Authe Endpoints
-POST /api/users/register: Registers a new user. This endpoint is not protected and can be accessed by anyone.
-POST /api/users/login: Logs in a user. This endpoint is not protected and can be accessed by anyone.
-GET /api/users/profile: Gets the user profile. This endpoint is protected and can only be accessed by authenticated users with a valid access token.
-PUT /api/users/profile: Updates the user profile. This endpoint is protected and can only be accessed by authenticated users with a valid access token.
-POST /api/users/logout: Logs out the user. This endpoint is protected and can only be accessed by authenticated users with a valid access token.
+##### User Auth Endpoints
+- POST /api/users/register: Registers a new user. This endpoint is not protected and can be accessed by anyone.
+- POST /api/users/login: Logs in a user. This endpoint is not protected and can be accessed by anyone.
+- GET /api/users/profile: Gets the user profile. This endpoint is protected and can only be accessed by authenticated users with a valid access token.
+- PUT /api/users/profile: Updates the user profile. This endpoint is protected and can only be accessed by authenticated users with a valid access token.
+- POST /api/users/logout: Logs out the user. This endpoint is protected and can only be accessed by authenticated users with a valid access token.
 
 ##### Explore Endpoints
-POST /api/explore/nearby-cities: Gets nearby cities using the GeoDB Cities API. This endpoint is protected and can only be accessed by authenticated users with a valid access token.
-POST /api/explore/country-data: Gets country data using the GeoDB Cities API. This endpoint is protected and can only be accessed by authenticated users with a valid access token.
-POST /api/explore/country-history: Gets the user's country search history. This endpoint is protected and can only be accessed by authenticated users with a valid access token.
+- POST /api/explore/nearby-cities: Gets nearby cities using the GeoDB Cities API. This endpoint is protected and can only be accessed by authenticated users with a valid access token.
+- POST /api/explore/country-data: Gets country data using the GeoDB Cities API. This endpoint is protected and can only be accessed by authenticated users with a valid access token.
+- POST /api/explore/country-history: Gets the user's country search history. This endpoint is protected and can only be accessed by authenticated users with a valid access token.
   
 
 ## Authentication
 
 The Test Task API uses JWT (JSON Web Token) for user authentication. When a user logs in, a JWT token is generated and sent back to the client, which is then stored in the browser's local storage. This token is then included in the header of every subsequent request to the API that requires authentication.
 
-Initially, cookies were used for carrying the JWT however due to hosting limitation introducing issues resolving third party cookie resolution, the authentication was refactored.
+_Note: Initially, cookies were used for carrying the JWT however due to hosting limitations introducing issues involving third party cookie resolution, the authentication was refactored to use local storage instead._
 
 ## Credits
 
