@@ -36,48 +36,40 @@ export async function getCitiesNearMe(coords) {
     },
   };
 
-  const Until = 10; // Set the maximum number of results to retrieve
+  const Until = 20; // Set the maximum number of results to retrieve
   let results = [];
 
-  try {
-    while (results.length < Until) {
-      //1. Fire off requests
-      const response = await axios.request({
-        ...options,
-        params: {
-          ...options.params,
-        },
-      });
+  while (results.length < Until) {
+    //1. Fire off requests
+    const response = await axios.request({
+      ...options,
+      params: {
+        ...options.params,
+      },
+    });
 
-      console.log("Fetched " + response.data.data.length + " Countries");
+    console.log("Fetched " + response.data.data.length + " Countries");
 
-      // 1.5 Add the results to the array
-      results = results.concat(response.data.data);
+    // 1.5 Add the results to the array
+    results = results.concat(response.data.data);
 
-      // Check if the maximum number of results has been reached
-      if (results.length >= Until) {
-        console.log("Maximum number of results reached");
-        break;
-      }
-
-      //if not
-      const nextLink =
-        response.data.links &&
-        response.data.links.find((link) => link.rel == "next");
-
-      if (!nextLink) {
-        break;
-      }
-
-      const fullNextLink = baseNextURL + nextLink.href || null;
-
-      paramsOptions.offset += paramsOptions.limit;
-      options.url = fullNextLink;
-
-      await new Promise((resolve) => setTimeout(resolve, 800));
+    // 2. Paginate through the api
+    if (results.length >= Until) {
+      console.log("Maximum number of results reached");
+      break;
     }
-  } catch (error) {
-    console.error(error);
+    const nextLink =
+      response.data.links &&
+      response.data.links.find((link) => link.rel == "next");
+    if (!nextLink) {
+      break;
+    }
+    const fullNextLink = baseNextURL + nextLink.href || null;
+    paramsOptions.offset += paramsOptions.limit;
+    options.url = fullNextLink;
+
+    //Artificial latency to not trip rate limits
+    await new Promise((resolve) => setTimeout(resolve, 200));
   }
 
   let sanitizedResults = results.map((city) => ({
