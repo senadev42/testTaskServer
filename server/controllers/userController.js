@@ -26,9 +26,12 @@ const authUser = asyncHandler(async (req, res) => {
   console.log("User ID: " + userId);
 
   if (await user.matchPassword(password)) {
+    console.log("Generating cookie based on " + process.env.JWT_SECRET);
     const token = jwt.sign({ userId }, process.env.JWT_SECRET, {
       expiresIn: "30d",
     });
+
+    console.log("Sending cookie: " + token);
 
     res.cookie("testtaskcookie", token, {
       httpOnly: true,
