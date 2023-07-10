@@ -2,6 +2,11 @@
 
 This is the server-side of a full-stack web application that allows users to register, log in, and search for cities using the GeoDB Cities API. The backend of the application was built using Node.js and Express.js, and interacts with the frontend client using Axios HTTP client. It uses a MongoDB database for data storage.
 
+It's client is found hosted at https://github.com/senadev42/testTaskClient and running at http://test-task-client-tau.vercel.app/
+
+Note: The server for this site is hosted on testtask-server.onrender.com which goes dormant after more than 15 minutes of activity so the first request will take a while as the web server spins up. Check to see if the server is running by going to testtask-server.onrender.com before testing the client.
+
+
 ## Folder Structure
 
 The project has the following folder structure:
@@ -39,7 +44,6 @@ The project has the following folder structure:
 - `geodb.js`: Initializes the GeoDB Cities API client.
 - `middleware`: Contains middleware functions for the application.
 - `models`: Contains the database schema models for the application.
-- `public`: Contains the public files for the application.
 - `routes`: Contains the route handlers for the application.
 - `server.js`: Initializes the Express.js server.
 
@@ -51,8 +55,6 @@ To run the application on your machine, you need to have Node.js and MongoDB ins
 
    ````
    git clone https://github.com/senadev42/testTaskServer.git
-   ```
-
    ````
 
 2. Navigate to the project directory using:
@@ -85,6 +87,8 @@ To run the application on your machine, you need to have Node.js and MongoDB ins
 
    This will run the application on `http://localhost:<port_number>`.
 
+Note: The client is configure to proxy to port 5000 by default, but this can be configured in the vite.config.ts file.
+
 ## Technologies and Libraries Used
 
 The application was built with the following technologies and libraries:
@@ -104,11 +108,18 @@ The application was built with the following technologies and libraries:
 
 The Test Task API includes the following endpoints:
 
-- `POST /api/users/register`: Registers a new user.
-- `POST /api/users/login`: Logs in a user.
-- `GET /api/users/profile`: Gets the user profile.
-- `PUT /api/users/profile`: Updates the user profile.
-- `POST /api/explore/search`: Searches for cities using the GeoDB Cities API.
+##### User Authe Endpoints
+POST /api/users/register: Registers a new user. This endpoint is not protected and can be accessed by anyone.
+POST /api/users/login: Logs in a user. This endpoint is not protected and can be accessed by anyone.
+GET /api/users/profile: Gets the user profile. This endpoint is protected and can only be accessed by authenticated users with a valid access token.
+PUT /api/users/profile: Updates the user profile. This endpoint is protected and can only be accessed by authenticated users with a valid access token.
+POST /api/users/logout: Logs out the user. This endpoint is protected and can only be accessed by authenticated users with a valid access token.
+
+##### Explore Endpoints
+POST /api/explore/nearby-cities: Gets nearby cities using the GeoDB Cities API. This endpoint is protected and can only be accessed by authenticated users with a valid access token.
+POST /api/explore/country-data: Gets country data using the GeoDB Cities API. This endpoint is protected and can only be accessed by authenticated users with a valid access token.
+POST /api/explore/country-history: Gets the user's country search history. This endpoint is protected and can only be accessed by authenticated users with a valid access token.
+  
 
 ## Authentication
 
