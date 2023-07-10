@@ -7,6 +7,15 @@ It's client is found hosted at https://github.com/senadev42/testTaskClient and r
 Note: The server for this site is hosted on testtask-server.onrender.com which goes dormant after more than 15 minutes of activity so the first request will take a while as the web server spins up. Check to see if the server is running by going to testtask-server.onrender.com before testing the client.
 
 
+## Development Approach
+1. I approached this task starting with the server, setting up authentication endpoints as well with express, the database schema and models with Mongoose.
+2. After that I then imlementing the pages for login, registration and logging out using redux to both accept and save incoming data and to make the api calls with apislices. 
+3. And then I implemented the other necessary pages on the front end so I could visualize what data they needed from the GeoDB API and in what format the needed to recieve and how this data would be stored. I implemented it in the following order: NearMe (fetching static data), Search (fetching dynamic data) and History (retrieving data).
+4. Then I moved on to the backend end and implementing the routes to return the data and the utility functions to fetch this data from the GeoDB API.
+5. After this I went back to the frontend to implement sanitization and error handling and testing for edge cases.
+6. I initially implemented authentication with cookies, however upon moving to the deployment stage, I discovered that the hosted front end was not recieving cookies from the server which in turn made it impossibly to interact with the protected APIs. I discovered that this was likely caused by the hosting solution I used where the server and client were on different domains and origins. I rewrote the authentication to use local storage after that and deployed again.
+
+
 ## Folder Structure
 
 The project has the following folder structure:
