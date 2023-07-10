@@ -36,7 +36,6 @@ const authUser = asyncHandler(async (req, res) => {
     res.cookie("testtaskcookie", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV !== "development",
-      sameSite: "strict",
       maxAge: 30 * 24 * 60 * 60 * 1000,
     });
 
@@ -89,7 +88,6 @@ const registerUser = asyncHandler(async (req, res) => {
   res.cookie("testtaskcookie", token, {
     httpOnly: true,
     secure: process.env.NODE_ENV !== "development",
-    sameSite: "strict",
     maxAge: 30 * 24 * 60 * 60 * 1000,
   });
 
@@ -118,13 +116,12 @@ const registerUser = asyncHandler(async (req, res) => {
  * @access  Public
  */
 const logoutUser = (req, res) => {
-  res.cookie(process.env.JWT_COOKIE_NAME, "", {
+  res.cookie("testtaskcookie", "", {
     httpOnly: true,
     expires: new Date(0),
     maxAge: 0,
   });
 
-  //console.log(process.env.JWT_COOKIE_NAME);
   res.status(200).json({ message: "Logged out successfully" });
 };
 
