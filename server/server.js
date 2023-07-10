@@ -17,7 +17,12 @@ const app = express();
 const port = process.env.PORT || 5000;
 const __dirname = path.dirname(new URL(import.meta.url).pathname);
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "testtask-client.onrender.com",
+    credentials: true,
+  })
+);
 
 // Parsing Middleware
 app.use(express.json());
