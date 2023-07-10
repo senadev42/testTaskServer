@@ -10,7 +10,10 @@ import jwt from "jsonwebtoken";
  * @access  Public
  */
 const authUser = asyncHandler(async (req, res) => {
+  console.log("User trying to log in:");
   const { email, password } = req.body;
+
+  console.log(`with ${email} and ${password}`);
 
   const user = await User.findOne({ email });
 
@@ -18,6 +21,9 @@ const authUser = asyncHandler(async (req, res) => {
     res.status(401);
     throw new Error("Invalid email");
   }
+
+  let userId = user._id;
+  console.log("User ID: " + userId);
 
   if (await user.matchPassword(password)) {
     const token = jwt.sign({ userId }, process.env.JWT_SECRET, {
@@ -70,6 +76,11 @@ const registerUser = asyncHandler(async (req, res) => {
     name,
     email,
     password,
+  });
+
+  let userId = user._id;
+  const token = jwt.sign({ userId }, process.env.JWT_SECRET, {
+    expiresIn: "30d",
   });
 
   res.cookie("testtaskcookie", token, {
