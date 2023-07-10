@@ -3,6 +3,8 @@ import express from "express";
 import cookieParser from "cookie-parser";
 import path from "path";
 
+import cors from "cors";
+
 //Importing Routes
 import userRoutes from "./routes/userRoutes.js";
 import exploreRoutes from "./routes/exploreRoutes.js";
@@ -14,6 +16,8 @@ import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 const app = express();
 const port = process.env.PORT || 5000;
 const __dirname = path.dirname(new URL(import.meta.url).pathname);
+
+app.use(cors());
 
 // Parsing Middleware
 app.use(express.json());
