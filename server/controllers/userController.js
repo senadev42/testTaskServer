@@ -31,13 +31,17 @@ const authUser = asyncHandler(async (req, res) => {
       expiresIn: "30d",
     });
 
-    console.log("Sending cookie: " + token);
+    //FIXME
+
+    console.log("Sending cookie: in " + process.env.NODE_ENV + " mode");
 
     res.cookie("testtaskcookie", token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV !== "development",
+      secure: false,
       maxAge: 30 * 24 * 60 * 60 * 1000,
     });
+
+    console.log(res.getHeaders()["set-cookie"]);
 
     res.json({
       _id: user._id,
@@ -87,7 +91,7 @@ const registerUser = asyncHandler(async (req, res) => {
 
   res.cookie("testtaskcookie", token, {
     httpOnly: true,
-    secure: process.env.NODE_ENV !== "development",
+    secure: false,
     maxAge: 30 * 24 * 60 * 60 * 1000,
   });
 
