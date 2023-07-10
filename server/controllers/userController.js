@@ -26,28 +26,26 @@ const authUser = asyncHandler(async (req, res) => {
   console.log("User ID: " + userId);
 
   if (await user.matchPassword(password)) {
-    console.log("Generating cookie based on " + process.env.JWT_SECRET);
+    // console.log("Generating cookie based on " + process.env.JWT_SECRET);
     const token = jwt.sign({ userId }, process.env.JWT_SECRET, {
       expiresIn: "30d",
     });
 
     //FIXME
-
-    console.log("Sending cookie: in " + process.env.NODE_ENV + " mode");
-
-    res.cookie("testtaskcookie", token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV !== "development",
-      sameSite: "none",
-      maxAge: 30 * 24 * 60 * 60 * 1000,
-    });
-
-    console.log(res.getHeaders()["set-cookie"]);
+    // console.log("Sending cookie: in " + process.env.NODE_ENV + " mode");
+    // res.cookie("testtaskcookie", token, {
+    //   httpOnly: true,
+    //   secure: process.env.NODE_ENV !== "development",
+    //   sameSite: "none",
+    //   maxAge: 30 * 24 * 60 * 60 * 1000,
+    // });
+    // console.log(res.getHeaders()["set-cookie"]);
 
     res.json({
       _id: user._id,
       name: user.name,
       email: user.email,
+      token: token,
     });
   } else {
     res.status(401);
@@ -90,18 +88,18 @@ const registerUser = asyncHandler(async (req, res) => {
   const token = jwt.sign({ userId }, process.env.JWT_SECRET, {
     expiresIn: "30d",
   });
-
-  res.cookie("testtaskcookie", token, {
-    httpOnly: true,
-    secure: process.env.NODE_ENV !== "development",
-    sameSite: "none",
-    maxAge: 30 * 24 * 60 * 60 * 1000,
-  });
+  // res.cookie("testtaskcookie", token, {
+  //   httpOnly: true,
+  //   secure: process.env.NODE_ENV !== "development",
+  //   sameSite: "none",
+  //   maxAge: 30 * 24 * 60 * 60 * 1000,
+  // });
 
   res.json({
     _id: user._id,
     name: user.name,
     email: user.email,
+    token: token,
   });
 
   if (user) {

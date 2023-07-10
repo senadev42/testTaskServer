@@ -6,21 +6,21 @@ import { config } from "dotenv";
 config();
 
 const protect = asyncHandler(async (req, res, next) => {
+  console.log("Attempting to protect");
   let token;
 
   // get token from cookies
-  token = req.cookies["testtaskcookie"];
+  // broken because of hosting mechanism
+  //token = req.cookies["testtaskcookie"];
+
+  //get token from body
+  token = req.body.authToken;
 
   //check if token in cookies from browser/request
   if (token) {
     try {
-      //decode the cookie
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
-      //check if the cookie belong to a user
       req.user = await User.findById(decoded.userId).select("-password");
-
-      //move along
       next();
     } catch (error) {
       console.error(error);
