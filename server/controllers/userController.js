@@ -37,8 +37,10 @@ const authUser = asyncHandler(async (req, res) => {
 
     res.cookie("testtaskcookie", token, {
       httpOnly: true,
-      secure: false,
+      secure: process.env.NODE_ENV !== "development",
+      sameSite: "none",
       maxAge: 30 * 24 * 60 * 60 * 1000,
+      domain: process.env.NODE_ENV !== "development" ? "vercel.app" : "",
     });
 
     console.log(res.getHeaders()["set-cookie"]);
@@ -91,8 +93,10 @@ const registerUser = asyncHandler(async (req, res) => {
 
   res.cookie("testtaskcookie", token, {
     httpOnly: true,
-    secure: false,
+    secure: process.env.NODE_ENV !== "development",
+    sameSite: "none",
     maxAge: 30 * 24 * 60 * 60 * 1000,
+    domain: process.env.NODE_ENV !== "development" ? "vercel.app" : "",
   });
 
   res.json({
