@@ -69,7 +69,7 @@ export async function getCitiesNearMe(coords) {
     options.url = fullNextLink;
 
     //Artificial latency to not trip rate limits
-    await new Promise((resolve) => setTimeout(resolve, 200));
+    await new Promise((resolve) => setTimeout(resolve, 800));
   }
 
   let sanitizedResults = results.map((city) => ({
